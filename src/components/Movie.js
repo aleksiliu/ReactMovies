@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class Movie extends React.Component {
   state = {
-    singleMovie: null,
+    singleMovie: undefined,
     loading: true
   };
 
@@ -38,25 +38,28 @@ class Movie extends React.Component {
               <h1>{this.state.singleMovie.original_title}</h1>
               <p>{this.state.singleMovie.release_date}</p>
               <p>{this.state.singleMovie.overview}</p>
-              <React.Fragment>
+              <div className="cast">
                 <h3>Cast</h3>
-                {this.state.singleMovie.credits.cast
-                  .slice(0, 10)
-                  .filter(img => img.profile_path)
-                  .map(cast => {
-                    return (
-                      <div key={cast.name}>
-                        <img
-                          src={`http://image.tmdb.org/t/p/w185/${
-                            cast.profile_path
-                          }`}
-                          alt={cast.original_title}
-                        />
-                        <p>{cast.name}</p>
-                      </div>
-                    );
-                  })}
-              </React.Fragment>
+                <ul className="cast_list">
+                  {this.state.singleMovie.credits.cast
+                    .slice(0, 10)
+                    .filter(img => img.profile_path)
+                    .map(cast => {
+                      return (
+                        <li key={cast.name}>
+                          <img
+                            className="cast_img"
+                            src={`http://image.tmdb.org/t/p/w185/${
+                              cast.profile_path
+                            }`}
+                            alt={cast.original_title}
+                          />
+                          <p>{cast.name}</p>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
             </React.Fragment>
           )}
         </div>
