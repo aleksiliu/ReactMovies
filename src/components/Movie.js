@@ -11,7 +11,7 @@ class Movie extends React.Component {
     const movieId = this.props.location.state.movieId;
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&append_to_response=credits`
       )
       .then(res => {
         const singleMovie = res.data;
@@ -20,6 +20,7 @@ class Movie extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="wrapper">
         <div className="singleMovie">
@@ -37,6 +38,25 @@ class Movie extends React.Component {
               <h1>{this.state.singleMovie.original_title}</h1>
               <p>{this.state.singleMovie.release_date}</p>
               <p>{this.state.singleMovie.overview}</p>
+              <React.Fragment>
+                <h3>Cast</h3>
+                {this.state.singleMovie.credits.cast
+                  .slice(0, 10)
+                  .filter(img => img.profile_path)
+                  .map(cast => {
+                    return (
+                      <div key={cast.name}>
+                        <img
+                          src={`http://image.tmdb.org/t/p/w185/${
+                            cast.profile_path
+                          }`}
+                          alt={cast.original_title}
+                        />
+                        <p>{cast.name}</p>
+                      </div>
+                    );
+                  })}
+              </React.Fragment>
             </React.Fragment>
           )}
         </div>

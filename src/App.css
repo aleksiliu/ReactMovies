@@ -67,6 +67,7 @@ input[type='text'] {
   width: 54px;
   height: 54px;
   animation: spin 0.8s linear infinite;
+  margin: 0 auto;
 }
 
 @keyframes spin {
