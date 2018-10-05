@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class TrendingMovie extends Component {
   state = {
-    trending: null,
+    trending: undefined,
     loading: true
   };
   componentDidMount() {
@@ -18,9 +18,7 @@ class TrendingMovie extends Component {
         this.setState({ trending, loading: false });
       });
   }
-  handleClick = id => {
-    console.log(id);
-  };
+
   render() {
     return (
       <div className="trending">
@@ -34,13 +32,10 @@ class TrendingMovie extends Component {
                 <Link
                   to={{
                     pathname: `/movie/${movie.id}`,
-                    state: { movieId: movie.id }
+                    movie: { movieId: movie.id }
                   }}
                 >
-                  <div
-                    onClick={() => this.handleClick(movie.id)}
-                    key={movie.id}
-                  >
+                  <div key={movie.id}>
                     <img
                       alt={movie.original_title}
                       src={`http://image.tmdb.org/t/p/w185/${

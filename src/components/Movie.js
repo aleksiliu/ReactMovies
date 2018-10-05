@@ -8,7 +8,7 @@ class Movie extends React.Component {
   };
 
   componentDidMount() {
-    const movieId = this.props.location.state.movieId;
+    const movieId = this.props.location.movie.movieId;
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${movieId}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&append_to_response=credits`
@@ -20,7 +20,6 @@ class Movie extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="wrapper">
         <div className="singleMovie">
