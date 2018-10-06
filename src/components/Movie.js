@@ -8,10 +8,10 @@ class Movie extends React.Component {
   };
 
   componentDidMount() {
-    const movieId = this.props.location.movie.movieId;
+    const id = this.props.match.params.movieId;
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&append_to_response=credits`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&append_to_response=credits`
       )
       .then(res => {
         const singleMovie = res.data;

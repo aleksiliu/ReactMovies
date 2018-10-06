@@ -29,12 +29,7 @@ class TrendingMovie extends Component {
             <h2>Trending Movies</h2>
             <div className="trending_movie_list">
               {this.state.trending.map(movie => (
-                <Link
-                  to={{
-                    pathname: `/movie/${movie.id}`,
-                    movie: { movieId: movie.id }
-                  }}
-                >
+                <Link to={`/movie/${movie.id}`}>
                   <div key={movie.id}>
                     <img
                       alt={movie.original_title}
