@@ -33,32 +33,37 @@ class Movie extends React.Component {
                 }`}
                 alt={this.state.singleMovie.original_title}
               />
-              <p>{this.state.singleMovie.vote_average}</p>
+              {this.state.singleMovie.vote_average !== 0 && (
+                <p>{this.state.singleMovie.vote_average}</p>
+              )}
               <h1>{this.state.singleMovie.original_title}</h1>
               <p>{this.state.singleMovie.release_date}</p>
               <p>{this.state.singleMovie.overview}</p>
-              <div className="cast">
-                <h3>Cast</h3>
-                <ul className="cast_list">
-                  {this.state.singleMovie.credits.cast
-                    .slice(0, 10)
-                    .filter(img => img.profile_path)
-                    .map(cast => {
-                      return (
-                        <li key={cast.name}>
-                          <img
-                            className="cast_img"
-                            src={`http://image.tmdb.org/t/p/w185/${
-                              cast.profile_path
-                            }`}
-                            alt={cast.original_title}
-                          />
-                          <p>{cast.name}</p>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
+
+              {this.state.singleMovie.credits.cast.length !== 0 && (
+                <div className="cast">
+                  <h3>Cast</h3>
+                  <ul className="cast_list">
+                    {this.state.singleMovie.credits.cast
+                      .slice(0, 10)
+                      .filter(img => img.profile_path)
+                      .map(cast => {
+                        return (
+                          <li key={cast.name}>
+                            <img
+                              className="cast_img"
+                              src={`http://image.tmdb.org/t/p/w185/${
+                                cast.profile_path
+                              }`}
+                              alt={cast.original_title}
+                            />
+                            <p>{cast.name}</p>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              )}
             </React.Fragment>
           )}
         </div>

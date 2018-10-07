@@ -22,8 +22,6 @@ class MovieResults extends React.Component {
   }
 
   render() {
-    console.log(this.props.match.params.term);
-    console.log(this.state);
     return (
       <div className="wrapper">
         {this.state.loading ? (
