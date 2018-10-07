@@ -11,9 +11,14 @@ class Form extends Component {
     });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.searchTerm);
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
           name="searchTerm"
