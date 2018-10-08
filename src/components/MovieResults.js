@@ -26,10 +26,6 @@ class MovieResults extends React.Component {
     this.performSearch();
   }
 
-  componentDidUpdate() {
-    this.performSearch();
-  }
-
   render() {
     return (
       <div className="wrapper">
