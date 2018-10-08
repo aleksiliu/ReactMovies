@@ -26,6 +26,12 @@ class MovieResults extends React.Component {
     this.performSearch();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.term !== this.props.match.params.term) {
+      this.performSearch();
+    }
+  }
+
   render() {
     return (
       <div className="wrapper">
