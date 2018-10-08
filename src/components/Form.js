@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { withRouter } from 'react-router-dom';
+
 class Form extends Component {
   state = {
     searchTerm: ''
@@ -13,7 +15,13 @@ class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.searchTerm);
+    if (this.state.searchTerm.trim() === '') {
+      return false;
+    }
+    this.props.history.push(`/search/${this.state.searchTerm}`);
+    this.setState({
+      searchTerm: ''
+    });
   };
 
   render() {
@@ -22,7 +30,7 @@ class Form extends Component {
         <input
           type="text"
           name="searchTerm"
-          value={this.state.term}
+          value={this.state.searchTerm}
           onChange={this.handleChange}
           placeholder="Search movie"
         />
@@ -31,4 +39,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default withRouter(Form);

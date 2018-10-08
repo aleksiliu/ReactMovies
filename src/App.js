@@ -5,14 +5,10 @@ import './App.css';
 import axios from 'axios';
 
 class App extends Component {
-  onSubmit = term => {
-    this.props.history.push(`/search/${term}`);
-  };
-
   render() {
     return (
       <div className="wrapper">
-        <Form onSubmit={this.onSubmit} />
+        <Form />
         <TrendingMovie />
       </div>
     );

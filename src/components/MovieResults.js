@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Form from './Form';
 
 import { Link } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ class MovieResults extends React.Component {
     loading: true
   };
 
-  componentDidMount() {
+  performSearch = () => {
     const term = this.props.match.params.term;
     axios
       .get(
@@ -19,6 +20,14 @@ class MovieResults extends React.Component {
         const movies = res.data.results;
         this.setState({ movies, loading: false });
       });
+  };
+
+  componentDidMount() {
+    this.performSearch();
+  }
+
+  componentDidUpdate() {
+    this.performSearch();
   }
 
   render() {
@@ -28,24 +37,33 @@ class MovieResults extends React.Component {
           <div className="loader" />
         ) : (
           <React.Fragment>
-            <h2>Results:</h2>
-            <div className="trending_movie_list">
-              {this.state.movies.filter(img => img.poster_path).map(movie => {
-                return (
-                  <Link to={`/movie/${movie.id}`}>
-                    <div key={movie.id}>
-                      <img
-                        alt={movie.original_title}
-                        src={`http://image.tmdb.org/t/p/w185/${
-                          movie.poster_path
-                        }`}
-                      />
-                      <p>{movie.original_title}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <Form />
+            {this.state.movies.length === 0 ? (
+              <p>No movies found</p>
+            ) : (
+              <React.Fragment>
+                <h2>Results:</h2>
+                <div className="movie-list">
+                  {this.state.movies
+                    .filter(img => img.poster_path)
+                    .map(movie => {
+                      return (
+                        <Link to={`/movie/${movie.id}`} key={movie.id}>
+                          <div>
+                            <img
+                              alt={movie.original_title}
+                              src={`http://image.tmdb.org/t/p/w185/${
+                                movie.poster_path
+                              }`}
+                            />
+                            <p>{movie.original_title}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                </div>
+              </React.Fragment>
+            )}
           </React.Fragment>
         )}
       </div>

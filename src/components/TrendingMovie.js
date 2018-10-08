@@ -27,7 +27,7 @@ class TrendingMovie extends Component {
         ) : (
           <React.Fragment>
             <h2>Trending Movies</h2>
-            <div className="trending_movie_list">
+            <div className="movie-list">
               {this.state.trending.map(movie => (
                 <Link to={`/movie/${movie.id}`}>
                   <div key={movie.id}>
