@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import StarRatingComponent from 'react-star-rating-component';
 
 class Movie extends React.Component {
   state = {
@@ -34,9 +35,18 @@ class Movie extends React.Component {
                 alt={this.state.singleMovie.original_title}
               />
               {this.state.singleMovie.vote_average !== 0 && (
-                <p>{this.state.singleMovie.vote_average}</p>
+                <div className="star">
+                  <StarRatingComponent
+                    name="rate2"
+                    editing={false}
+                    starCount={10}
+                    value={this.state.singleMovie.vote_average}
+                  />
+                  <span>{this.state.singleMovie.vote_average} / 10</span>
+                </div>
               )}
               <h1>{this.state.singleMovie.original_title}</h1>
+
               <p>{this.state.singleMovie.release_date}</p>
               <p>{this.state.singleMovie.overview}</p>
 

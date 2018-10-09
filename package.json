@@ -1,4 +1,5 @@
 {
+  "homepage": "http://aleksiliu.github.io/react-movies",
   "name": "reactmovies",
   "version": "0.1.0",
   "private": true,
@@ -8,9 +9,12 @@
     "react-dom": "^16.5.2",
     "react-router-config": "^4.4.0-beta.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.4"
+    "react-scripts": "2.0.4",
+    "react-star-rating-component": "^1.4.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -26,6 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "gh-pages": "^2.0.1"
   }
 }

@@ -6,20 +6,42 @@ import { Link } from 'react-router-dom';
 
 class MovieResults extends React.Component {
   state = {
-    movies: [],
+    movies: {},
+    page: 1,
     loading: true
   };
 
-  performSearch = () => {
+  getMovie = () => {
     const term = this.props.match.params.term;
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&query=${term}&page=1&include_adult=false`
-      )
-      .then(res => {
-        const movies = res.data.results;
-        this.setState({ movies, loading: false });
+    return axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&query=${term}&page=${
+        this.state.page
+      }&include_adult=false`
+    );
+  };
+
+  performSearch = () => {
+    this.getMovie().then(res => {
+      const movies = res.data;
+      this.setState({
+        movies,
+        loading: false
       });
+    });
+  };
+
+  loadMore = () => {
+    this.state.page++;
+    this.getMovie().then(res => {
+      const movies = res.data;
+      this.setState({
+        movies: {
+          ...movies,
+          results: [...this.state.movies.results, ...movies.results]
+        },
+        loading: false
+      });
+    });
   };
 
   componentDidMount() {
@@ -28,25 +50,31 @@ class MovieResults extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.term !== this.props.match.params.term) {
-      this.performSearch();
+      this.setState(
+        state => ({
+          page: 1
+        }),
+        () => this.performSearch()
+      );
     }
   }
 
   render() {
     return (
       <div className="wrapper">
+        <Form />
         {this.state.loading ? (
           <div className="loader" />
         ) : (
           <React.Fragment>
-            <Form />
-            {this.state.movies.length === 0 ? (
+            {this.state.movies.results.length === 0 ? (
               <p>No movies found</p>
             ) : (
               <React.Fragment>
                 <h2>Results:</h2>
+
                 <div className="movie-list">
-                  {this.state.movies
+                  {this.state.movies.results
                     .filter(img => img.poster_path)
                     .map(movie => {
                       return (
@@ -68,6 +96,13 @@ class MovieResults extends React.Component {
             )}
           </React.Fragment>
         )}
+        <div>
+          {this.state.movies.page < this.state.movies.total_pages && (
+            <div>
+              <button onClick={this.loadMore}>Load more</button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
