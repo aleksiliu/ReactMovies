@@ -11,10 +11,12 @@ body {
 }
 
 .bg {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  max-height: 500px;
+  height: 500px;
+  position: relative;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: -300px;
 }
 
 a {
@@ -62,8 +64,6 @@ input[type='text'] {
 .movie {
   max-width: 960px;
   margin: 0 auto;
-  position: relative;
-  top: 300px;
   display: grid;
   grid-template-areas:
     'poster info'
@@ -71,6 +71,9 @@ input[type='text'] {
     'cast cast';
   grid-template-rows: auto auto;
   grid-template-columns: 220px 1fr;
+  z-index: 100;
+  position: relative;
+  top: 100px;
 }
 
 .overview {

@@ -27,67 +27,68 @@ class Movie extends React.Component {
           <div className="loader" />
         ) : (
           <React.Fragment>
-            <div
-              className="bg"
-              style={{
-                background: `linear-gradient(rgba(0, 0, 0, 0), rgba(27, 33, 47, 0.9)), url(http://image.tmdb.org/t/p/w1280/${
-                  this.state.singleMovie.backdrop_path
-                })`
-              }}
-            >
-              <div className="movie">
-                <div className="poster">
-                  <img
-                    src={`http://image.tmdb.org/t/p/w185/${
-                      this.state.singleMovie.poster_path
-                    }`}
-                    alt={this.state.singleMovie.original_title}
-                  />
-                </div>
-                <div className="movie-details">
-                  <p>{this.state.singleMovie.release_date}</p>
-                  <h1>{this.state.singleMovie.original_title}</h1>
-                  {this.state.singleMovie.vote_average !== 0 && (
-                    <div className="star">
-                      <StarRatingComponent
-                        name="rate2"
-                        editing={false}
-                        starCount={10}
-                        value={this.state.singleMovie.vote_average}
-                      />
-                      <span>{this.state.singleMovie.vote_average} / 10</span>
-                    </div>
-                  )}
-                </div>
-                <div className="overview">
-                  <h3>Overview</h3>
-                  <p>{this.state.singleMovie.overview}</p>
-                </div>
-                {this.state.singleMovie.credits.cast.length !== 0 && (
-                  <div className="cast">
-                    <h3>Cast</h3>
-                    <ul className="cast_list">
-                      {this.state.singleMovie.credits.cast
-                        .slice(0, 10)
-                        .filter(img => img.profile_path)
-                        .map(cast => {
-                          return (
-                            <li key={cast.name}>
-                              <img
-                                className="cast_img"
-                                src={`http://image.tmdb.org/t/p/w185/${
-                                  cast.profile_path
-                                }`}
-                                alt={cast.original_title}
-                              />
-                              <p>{cast.name}</p>
-                            </li>
-                          );
-                        })}
-                    </ul>
+            {this.state.singleMovie.backdrop_path !== null && (
+              <div
+                className="bg"
+                style={{
+                  background: `linear-gradient(rgba(0, 0, 0, 0), rgba(27, 33, 47, 0.9)), url(http://image.tmdb.org/t/p/w1280/${
+                    this.state.singleMovie.backdrop_path
+                  }) center center / cover no-repeat`
+                }}
+              />
+            )}
+            <div className="movie">
+              <div className="poster">
+                <img
+                  src={`http://image.tmdb.org/t/p/w185/${
+                    this.state.singleMovie.poster_path
+                  }`}
+                  alt={this.state.singleMovie.original_title}
+                />
+              </div>
+              <div className="movie-details">
+                <p>{this.state.singleMovie.release_date}</p>
+                <h1>{this.state.singleMovie.original_title}</h1>
+                {this.state.singleMovie.vote_average !== 0 && (
+                  <div className="star">
+                    <StarRatingComponent
+                      name="rate2"
+                      editing={false}
+                      starCount={10}
+                      value={this.state.singleMovie.vote_average}
+                    />
+                    <span>{this.state.singleMovie.vote_average} / 10</span>
                   </div>
                 )}
               </div>
+              <div className="overview">
+                <h3>Overview</h3>
+                <p>{this.state.singleMovie.overview}</p>
+              </div>
+              {this.state.singleMovie.credits.cast.length !== 0 && (
+                <div className="cast">
+                  <h3>Cast</h3>
+                  <ul className="cast_list">
+                    {this.state.singleMovie.credits.cast
+                      .slice(0, 10)
+                      .filter(img => img.profile_path)
+                      .map(cast => {
+                        return (
+                          <li key={cast.name}>
+                            <img
+                              className="cast_img"
+                              src={`http://image.tmdb.org/t/p/w185/${
+                                cast.profile_path
+                              }`}
+                              alt={cast.original_title}
+                            />
+                            <p>{cast.name}</p>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              )}
             </div>
           </React.Fragment>
         )}
