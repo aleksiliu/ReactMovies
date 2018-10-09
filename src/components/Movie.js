@@ -43,6 +43,7 @@ class Movie extends React.Component {
                   src={`http://image.tmdb.org/t/p/w185/${
                     this.state.singleMovie.poster_path
                   }`}
+                  className="poster-img"
                   alt={this.state.singleMovie.original_title}
                 />
               </div>
@@ -63,6 +64,7 @@ class Movie extends React.Component {
                       editing={false}
                       starCount={10}
                       value={this.state.singleMovie.vote_average}
+                      emptyStarColor={'000'}
                     />
                     <span>{this.state.singleMovie.vote_average} / 10</span>
                   </div>
