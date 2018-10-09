@@ -30,8 +30,7 @@ class MovieResults extends React.Component {
     });
   };
 
-  loadMore = () => {
-    this.state.page++;
+  performSearchMore = () => {
     this.getMovie().then(res => {
       const movies = res.data;
       this.setState({
@@ -42,6 +41,15 @@ class MovieResults extends React.Component {
         loading: false
       });
     });
+  };
+
+  loadMore = () => {
+    this.setState(
+      (prevState, props) => ({
+        page: prevState.page + 1
+      }),
+      () => this.performSearchMore()
+    );
   };
 
   componentDidMount() {
