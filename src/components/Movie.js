@@ -49,6 +49,13 @@ class Movie extends React.Component {
               <div className="movie-details">
                 <p>{this.state.singleMovie.release_date}</p>
                 <h1>{this.state.singleMovie.original_title}</h1>
+                <div>
+                  <ul className="genres">
+                    {this.state.singleMovie.genres.map(genre => (
+                      <li>{genre.name}</li>
+                    ))}
+                  </ul>
+                </div>
                 {this.state.singleMovie.vote_average !== 0 && (
                   <div className="star">
                     <StarRatingComponent
