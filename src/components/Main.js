@@ -3,7 +3,7 @@ import Form from './Form';
 import TrendingMovie from './TrendingMovie';
 import '../App.css';
 
-class App extends Component {
+class Main extends Component {
   render() {
     return (
       <div className="wrapper">
@@ -14,4 +14,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Main;

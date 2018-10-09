@@ -29,8 +29,8 @@ class TrendingMovie extends Component {
             <h2>Trending Movies</h2>
             <div className="movie-list">
               {this.state.trending.map(movie => (
-                <Link to={`/movie/${movie.id}`}>
-                  <div key={movie.id}>
+                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                  <div>
                     <img
                       alt={movie.original_title}
                       src={`http://image.tmdb.org/t/p/w185/${
