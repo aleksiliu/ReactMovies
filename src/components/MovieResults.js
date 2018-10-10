@@ -94,7 +94,9 @@ class MovieResults extends React.Component {
                                 movie.poster_path
                               }`}
                             />
-                            <p>{movie.original_title}</p>
+                            <p className="movie-title">
+                              {movie.original_title}
+                            </p>
                           </div>
                         </Link>
                       );

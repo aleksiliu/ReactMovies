@@ -33,11 +33,11 @@ class TrendingMovie extends Component {
                   <div>
                     <img
                       alt={movie.original_title}
-                      src={`http://image.tmdb.org/t/p/w185/${
+                      src={`http://image.tmdb.org/t/p/w342/${
                         movie.poster_path
                       }`}
                     />
-                    <p>{movie.original_title}</p>
+                    <p className="movie-title">{movie.original_title}</p>
                   </div>
                 </Link>
               ))}
