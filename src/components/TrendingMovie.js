@@ -26,7 +26,7 @@ class TrendingMovie extends Component {
           <div className="loader" />
         ) : (
           <React.Fragment>
-            <h2>Trending Movies</h2>
+            <h3>Trending </h3>
             <div className="movie-list">
               {this.state.trending.map(movie => (
                 <Link to={`/movie/${movie.id}`} key={movie.id}>
@@ -36,6 +36,7 @@ class TrendingMovie extends Component {
                       src={`http://image.tmdb.org/t/p/w342/${
                         movie.poster_path
                       }`}
+                      className="movie-img"
                     />
                     <p className="movie-title">{movie.original_title}</p>
                   </div>

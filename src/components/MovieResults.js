@@ -79,7 +79,7 @@ class MovieResults extends React.Component {
               <p>No movies found</p>
             ) : (
               <React.Fragment>
-                <h2>Results:</h2>
+                <h3>Results</h3>
 
                 <div className="movie-list">
                   {this.state.movies.results
@@ -90,9 +90,10 @@ class MovieResults extends React.Component {
                           <div>
                             <img
                               alt={movie.original_title}
-                              src={`http://image.tmdb.org/t/p/w185/${
+                              src={`http://image.tmdb.org/t/p/w342/${
                                 movie.poster_path
                               }`}
+                              className="movie-img"
                             />
                             <p className="movie-title">
                               {movie.original_title}

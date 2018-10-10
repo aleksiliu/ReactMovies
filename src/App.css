@@ -123,7 +123,7 @@ input[type='text'] {
   grid-gap: 40px;
 }
 
-.movie-list img {
+.movie-img {
   max-width: 100%;
   height: auto;
 }
@@ -181,6 +181,10 @@ h3 {
 
 .movie-title {
   text-align: center;
+  margin-top: 10px;
+}
+
+.actor-title {
   margin-top: 10px;
 }
 

@@ -92,7 +92,7 @@ class Movie extends React.Component {
                               }`}
                               alt={cast.original_title}
                             />
-                            <p>{cast.name}</p>
+                            <p className="actor-title">{cast.name}</p>
                           </li>
                         );
                       })}
