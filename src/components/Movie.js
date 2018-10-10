@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
+import { Link } from 'react-router-dom';
 
 class Movie extends React.Component {
   state = {
     singleMovie: undefined,
+    error: false,
     loading: true
   };
 
@@ -17,10 +19,22 @@ class Movie extends React.Component {
       .then(res => {
         const singleMovie = res.data;
         this.setState({ singleMovie, loading: false });
+      })
+      .catch(error => {
+        console.log('error: ' + error);
+        this.setState({ error: true });
       });
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <div>
+          Error :( <Link to={'/'}>Get back to homepage</Link>
+        </div>
+      );
+    }
+
     return (
       <div className="singleMovie">
         {this.state.loading ? (
