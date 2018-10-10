@@ -79,7 +79,7 @@ class MovieResults extends React.Component {
               <p>No movies found</p>
             ) : (
               <React.Fragment>
-                <h3>Results</h3>
+                <h3>Results for "{this.props.match.params.term}"</h3>
 
                 <div className="movie-list">
                   {this.state.movies.results
@@ -107,10 +107,10 @@ class MovieResults extends React.Component {
             )}
           </React.Fragment>
         )}
-        <div>
+        <div className="load">
           {this.state.movies.page < this.state.movies.total_pages && (
-            <div>
-              <button onClick={this.loadMore}>Load more</button>
+            <div className="load-button" onClick={this.loadMore}>
+              Load more
             </div>
           )}
         </div>

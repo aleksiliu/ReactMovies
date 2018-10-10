@@ -33,7 +33,7 @@ class Movie extends React.Component {
                 style={{
                   background: `linear-gradient(rgba(0, 0, 0, 0), rgba(27, 33, 47, 0.9)), url(http://image.tmdb.org/t/p/w1280/${
                     this.state.singleMovie.backdrop_path
-                  }) center center / cover no-repeat`
+                  }) top center / cover no-repeat`
                 }}
               />
             )}
