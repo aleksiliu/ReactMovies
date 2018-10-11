@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
-import { Link } from 'react-router-dom';
+import Error from './Error';
 
 class Movie extends React.Component {
   state = {
@@ -28,11 +28,7 @@ class Movie extends React.Component {
 
   render() {
     if (this.state.error) {
-      return (
-        <div>
-          Error :( <Link to={'/'}>Get back to homepage</Link>
-        </div>
-      );
+      return <Error />;
     }
 
     return (
@@ -62,7 +58,9 @@ class Movie extends React.Component {
                 />
               </div>
               <div className="movie-details">
-                <p>{this.state.singleMovie.release_date}</p>
+                <p className="movie-details-date">
+                  {this.state.singleMovie.release_date}
+                </p>
                 <h1>{this.state.singleMovie.original_title}</h1>
 
                 {this.state.singleMovie.vote_average !== 0 && (
@@ -106,7 +104,8 @@ class Movie extends React.Component {
                               }`}
                               alt={cast.original_title}
                             />
-                            <p className="actor-title">{cast.name}</p>
+                            <p className="actor-title">{cast.character}</p>
+                            <p>{cast.name}</p>
                           </li>
                         );
                       })}
