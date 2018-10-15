@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
 import Error from './Error';
+import { Link } from 'react-router-dom';
 
 class Movie extends React.Component {
   state = {
@@ -96,17 +97,19 @@ class Movie extends React.Component {
                       .filter(img => img.profile_path)
                       .map(cast => {
                         return (
-                          <li key={cast.name}>
-                            <img
-                              className="cast_img"
-                              src={`http://image.tmdb.org/t/p/w185/${
-                                cast.profile_path
-                              }`}
-                              alt={cast.original_title}
-                            />
-                            <p className="actor-title">{cast.character}</p>
-                            <p>{cast.name}</p>
-                          </li>
+                          <Link to={`/actor/${cast.id}`} key={cast.id}>
+                            <li key={cast.name}>
+                              <img
+                                className="cast_img"
+                                src={`http://image.tmdb.org/t/p/w185/${
+                                  cast.profile_path
+                                }`}
+                                alt={cast.original_title}
+                              />
+                              <p className="actor-title">{cast.character}</p>
+                              <p>{cast.name}</p>
+                            </li>
+                          </Link>
                         );
                       })}
                   </ul>
