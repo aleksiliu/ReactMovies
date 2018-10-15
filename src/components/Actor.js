@@ -25,31 +25,40 @@ class Actor extends React.Component {
       });
   }
 
+  ellipsis = string => {
+    if (string.length > 422) return string.substring(0, 422) + '...';
+    else return string;
+  };
+
   render() {
     if (this.state.error) {
       return <Error />;
     }
 
     return (
-      <div className="wrapper">
+      <div className="actor center">
         {this.state.loading ? (
           <div className="loader" />
         ) : (
           <React.Fragment>
-            <img
-              alt={this.state.actor.name}
-              src={`http://image.tmdb.org/t/p/original/${
-                this.state.actor.profile_path
-              }`}
-              className="movie-img"
-            />
-            <h2> {this.state.actor.name} </h2>
-            <h3> {this.state.actor.birthday} </h3>
-            {this.state.actor.biography === '' ? (
-              <p>No bio</p>
-            ) : (
-              <p>{this.state.actor.biography}</p>
-            )}
+            <div className="actor-bio flex">
+              <h1> {this.state.actor.name} </h1>
+              <h3> {this.state.actor.birthday} </h3>
+              {this.state.actor.biography === '' ? (
+                <p>No bio</p>
+              ) : (
+                <p>{this.ellipsis(this.state.actor.biography)}</p>
+              )}
+            </div>
+            <div className="actor-img flex">
+              <img
+                alt={this.state.actor.name}
+                src={`http://image.tmdb.org/t/p/original/${
+                  this.state.actor.profile_path
+                }`}
+                className="movie-img"
+              />
+            </div>
           </React.Fragment>
         )}
       </div>
