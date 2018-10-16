@@ -36,7 +36,7 @@ class Actor extends React.Component {
     }
 
     return (
-      <div className="actor center">
+      <div className="actor">
         {this.state.loading ? (
           <div className="loader" />
         ) : (
