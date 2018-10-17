@@ -13,6 +13,7 @@ class Actor extends React.Component {
 
   componentDidMount() {
     const id = this.props.match.params.actorId;
+
     axios
       .get(
         `https://api.themoviedb.org/3/person/${id}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&&append_to_response=movie_credits`
@@ -63,9 +64,10 @@ class Actor extends React.Component {
                 />
               </div>
             </div>
-            <h3>Filmography for {this.state.actor.name}</h3>
+            <h3>Filmography</h3>
             <div className="movie-list">
               {this.state.actor.movie_credits.cast
+                .sort((a, b) => b.vote_average - a.vote_average)
                 .filter(img => img.poster_path)
                 .map(movie => {
                   return (
