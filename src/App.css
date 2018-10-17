@@ -223,7 +223,7 @@ p {
   display: flex;
   flex-direction: row;
   max-width: 960px;
-  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .flex {
