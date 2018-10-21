@@ -8,7 +8,8 @@ class Actor extends React.Component {
   state = {
     actor: undefined,
     loading: true,
-    value: undefined,
+    cast: undefined,
+    value: 'popular',
     error: false
   };
 
@@ -21,7 +22,10 @@ class Actor extends React.Component {
       )
       .then(res => {
         const actor = res.data;
-        this.setState({ actor, loading: false });
+        const cast = res.data.movie_credits.cast.sort(
+          (a, b) => b.vote_average - a.vote_average
+        );
+        this.setState({ actor, cast, loading: false });
       })
       .catch(error => {
         console.log('error: ' + error);
@@ -33,14 +37,18 @@ class Actor extends React.Component {
     this.setState({ value: event.target.value });
     switch (event.target.value) {
       case 'newest':
-        this.state.actor.movie_credits.cast.sort(
-          (a, b) => new Date(b.release_date) - new Date(a.release_date)
-        );
+        this.setState({
+          cast: this.state.cast.sort(
+            (a, b) => new Date(b.release_date) - new Date(a.release_date)
+          )
+        });
+
         break;
       case 'popular':
-        this.state.actor.movie_credits.cast.sort(
-          (a, b) => b.vote_average - a.vote_average
-        );
+        this.setState({
+          cast: this.state.cast.sort((a, b) => b.vote_average - a.vote_average)
+        });
+
         break;
     }
   };
@@ -74,7 +82,7 @@ class Actor extends React.Component {
               <div className="actor-img flex">
                 <img
                   alt={this.state.actor.name}
-                  src={`http://image.tmdb.org/t/p/original/${
+                  src={`http://image.tmdb.org/t/p/w500/${
                     this.state.actor.profile_path
                   }`}
                   className="movie-img"
@@ -82,30 +90,33 @@ class Actor extends React.Component {
               </div>
             </div>
             <h3>Filmography</h3>
-            <select value={this.state.value} onChange={this.handleChange}>
-              <option value="default">Sort by</option>
-              <option value="popular">Popular</option>
-              <option value="newest">Newest</option>
-            </select>
+            <div className="sort">
+              <p>Sort by: </p>
+              <select value={this.state.value} onChange={this.handleChange}>
+                <option value="popular">Popular</option>
+                <option value="newest">Newest</option>
+              </select>
+            </div>
+
             <div className="movie-list">
-              {this.state.actor.movie_credits.cast
-                .filter(img => img.poster_path)
-                .map(movie => {
-                  return (
-                    <Link to={`/movie/${movie.id}`} key={movie.id}>
-                      <div>
-                        <img
-                          alt={movie.original_title}
-                          src={`http://image.tmdb.org/t/p/w342/${
-                            movie.poster_path
-                          }`}
-                          className="movie-img"
-                        />
-                        <p className="movie-title">{movie.original_title}</p>
-                      </div>
-                    </Link>
-                  );
-                })}
+              {this.state.cast.filter(img => img.poster_path).map(movie => {
+                return (
+                  <Link to={`/movie/${movie.id}`} key={movie.id}>
+                    <div>
+                      <img
+                        alt={movie.original_title}
+                        src={`http://image.tmdb.org/t/p/w342/${
+                          movie.poster_path
+                        }`}
+                        className="movie-img"
+                      />
+                      <p className="movie-title">{movie.original_title}</p>
+                      <p className="movie-title">{movie.release_date}</p>
+                      <p className="movie-title">{movie.vote_average}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </React.Fragment>
         )}

@@ -206,7 +206,12 @@ p {
   margin-top: 10px;
 }
 
-.actor-title {
+.sort {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.sub-title {
   opacity: 1;
   margin-top: 10px;
 }

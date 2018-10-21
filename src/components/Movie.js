@@ -106,7 +106,7 @@ class Movie extends React.Component {
                                 }`}
                                 alt={cast.original_title}
                               />
-                              <p className="actor-title">{cast.character}</p>
+                              <p className="sub-title">{cast.character}</p>
                               <p>{cast.name}</p>
                             </li>
                           </Link>
