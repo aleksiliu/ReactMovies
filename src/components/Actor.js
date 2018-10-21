@@ -8,6 +8,7 @@ class Actor extends React.Component {
   state = {
     actor: undefined,
     loading: true,
+    value: undefined,
     error: false
   };
 
@@ -27,6 +28,22 @@ class Actor extends React.Component {
         this.setState({ error: true });
       });
   }
+
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+    switch (event.target.value) {
+      case 'newest':
+        this.state.actor.movie_credits.cast.sort(
+          (a, b) => new Date(b.release_date) - new Date(a.release_date)
+        );
+        break;
+      case 'popular':
+        this.state.actor.movie_credits.cast.sort(
+          (a, b) => b.vote_average - a.vote_average
+        );
+        break;
+    }
+  };
 
   ellipsis = string => {
     if (string.length > 422) return string.substring(0, 422) + '...';
@@ -65,9 +82,13 @@ class Actor extends React.Component {
               </div>
             </div>
             <h3>Filmography</h3>
+            <select value={this.state.value} onChange={this.handleChange}>
+              <option value="default">Sort by</option>
+              <option value="popular">Popular</option>
+              <option value="newest">Newest</option>
+            </select>
             <div className="movie-list">
               {this.state.actor.movie_credits.cast
-                .sort((a, b) => b.vote_average - a.vote_average)
                 .filter(img => img.poster_path)
                 .map(movie => {
                   return (

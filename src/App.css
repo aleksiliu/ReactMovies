@@ -180,6 +180,12 @@ h1 {
   line-height: 1.2;
 }
 
+.logo {
+  position: absolute;
+  z-index: 2;
+  margin-top: 30px;
+}
+
 h2 {
   font-size: 28px;
   margin-bottom: 15px;
