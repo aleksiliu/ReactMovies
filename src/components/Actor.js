@@ -34,24 +34,38 @@ class Actor extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
-    switch (event.target.value) {
+    this.setState({ value: event.target.value }, () => {
+      this.handleSwitch(this.state.value);
+    });
+  };
+
+  handleSwitch(value) {
+    switch (value) {
       case 'newest':
         this.setState({
           cast: this.state.cast.sort(
             (a, b) => new Date(b.release_date) - new Date(a.release_date)
           )
         });
-
+        break;
+      case 'oldest':
+        this.setState({
+          cast: this.state.cast.sort(
+            (a, b) => new Date(a.release_date) - new Date(b.release_date)
+          )
+        });
         break;
       case 'popular':
         this.setState({
           cast: this.state.cast.sort((a, b) => b.vote_average - a.vote_average)
         });
-
         break;
+      default:
+        this.setState({
+          cast: this.state.cast.sort((a, b) => b.vote_average - a.vote_average)
+        });
     }
-  };
+  }
 
   ellipsis = string => {
     if (string.length > 422) return string.substring(0, 422) + '...';
@@ -95,6 +109,7 @@ class Actor extends React.Component {
               <select value={this.state.value} onChange={this.handleChange}>
                 <option value="popular">Popular</option>
                 <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
               </select>
             </div>
 
