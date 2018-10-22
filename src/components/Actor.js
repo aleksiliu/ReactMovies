@@ -105,7 +105,7 @@ class Actor extends React.Component {
             </div>
             <h3>Filmography</h3>
             <div className="sort">
-              <p>Sort by: </p>
+              <p>Sort by</p>
               <select value={this.state.value} onChange={this.handleChange}>
                 <option value="popular">Popular</option>
                 <option value="newest">Newest</option>
