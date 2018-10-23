@@ -4,11 +4,23 @@ import Error from './Error';
 
 import { Link } from 'react-router-dom';
 
+import Select from 'react-select';
+
+const options = [
+  { value: 'rating', label: 'Rating' },
+  { value: 'oldest', label: 'Oldest' },
+  { value: 'newest', label: 'Newest' }
+];
+
 class Actor extends React.Component {
   state = {
     actor: undefined,
     loading: true,
-    sortedBy: 'rating',
+    sortedBy: {
+      label: 'Rating',
+      value: 'rating'
+    },
+    isSearchable: false,
     error: false
   };
 
@@ -29,8 +41,9 @@ class Actor extends React.Component {
       });
   }
 
-  handleChange = event => {
-    this.setState({ sortedBy: event.target.value });
+  handleChange = sortedBy => {
+    this.setState({ sortedBy });
+    console.log(`Option selected:`, sortedBy);
   };
 
   ellipsis = string => {
@@ -39,6 +52,8 @@ class Actor extends React.Component {
   };
 
   render() {
+    const { sortedBy, isSearchable } = this.state;
+
     if (this.state.error) {
       return <Error />;
     }
@@ -72,17 +87,19 @@ class Actor extends React.Component {
             <h3>Filmography</h3>
             <div className="sort">
               <p>Sort by</p>
-              <select value={this.state.sortedBy} onChange={this.handleChange}>
-                <option value="rating">Rating</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-              </select>
+              <Select
+                defaultValue={options[0]}
+                value={sortedBy}
+                onChange={this.handleChange}
+                options={options}
+                isSearchable={isSearchable}
+              />
             </div>
 
             <div className="movie-list">
               {[...this.state.actor.movie_credits.cast]
                 .sort((a, b) => {
-                  switch (this.state.sortedBy) {
+                  switch (this.state.sortedBy.value) {
                     case 'newest':
                       return (
                         new Date(b.release_date) - new Date(a.release_date)
@@ -92,6 +109,9 @@ class Actor extends React.Component {
                       return (
                         new Date(a.release_date) - new Date(b.release_date)
                       );
+                      break;
+                    case 'rating':
+                      return b.vote_average - a.vote_average;
                       break;
                     default:
                       return b.vote_average - a.vote_average;
