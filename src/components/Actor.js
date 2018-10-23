@@ -120,7 +120,6 @@ class Actor extends React.Component {
                     </Link>
                   );
                 })}
-              ;
             </div>
           </React.Fragment>
         )}
