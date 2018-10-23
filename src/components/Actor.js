@@ -8,8 +8,7 @@ class Actor extends React.Component {
   state = {
     actor: undefined,
     loading: true,
-    cast: undefined,
-    value: 'popular',
+    sortedBy: 'rating',
     error: false
   };
 
@@ -22,10 +21,7 @@ class Actor extends React.Component {
       )
       .then(res => {
         const actor = res.data;
-        const cast = res.data.movie_credits.cast.sort(
-          (a, b) => b.vote_average - a.vote_average
-        );
-        this.setState({ actor, cast, loading: false });
+        this.setState({ actor, loading: false });
       })
       .catch(error => {
         console.log('error: ' + error);
@@ -34,38 +30,8 @@ class Actor extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value }, () => {
-      this.handleSwitch(this.state.value);
-    });
+    this.setState({ sortedBy: event.target.value });
   };
-
-  handleSwitch(value) {
-    switch (value) {
-      case 'newest':
-        this.setState({
-          cast: this.state.cast.sort(
-            (a, b) => new Date(b.release_date) - new Date(a.release_date)
-          )
-        });
-        break;
-      case 'oldest':
-        this.setState({
-          cast: this.state.cast.sort(
-            (a, b) => new Date(a.release_date) - new Date(b.release_date)
-          )
-        });
-        break;
-      case 'popular':
-        this.setState({
-          cast: this.state.cast.sort((a, b) => b.vote_average - a.vote_average)
-        });
-        break;
-      default:
-        this.setState({
-          cast: this.state.cast.sort((a, b) => b.vote_average - a.vote_average)
-        });
-    }
-  }
 
   ellipsis = string => {
     if (string.length > 422) return string.substring(0, 422) + '...';
@@ -106,32 +72,55 @@ class Actor extends React.Component {
             <h3>Filmography</h3>
             <div className="sort">
               <p>Sort by</p>
-              <select value={this.state.value} onChange={this.handleChange}>
-                <option value="popular">Popular</option>
+              <select value={this.state.sortedBy} onChange={this.handleChange}>
+                <option value="rating">Rating</option>
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
               </select>
             </div>
 
             <div className="movie-list">
-              {this.state.cast.filter(img => img.poster_path).map(movie => {
-                return (
-                  <Link to={`/movie/${movie.id}`} key={movie.id}>
-                    <div>
-                      <img
-                        alt={movie.original_title}
-                        src={`http://image.tmdb.org/t/p/w342/${
-                          movie.poster_path
-                        }`}
-                        className="movie-img"
-                      />
-                      <p className="movie-title">{movie.original_title}</p>
-                      <p className="movie-title">{movie.release_date}</p>
-                      <p className="movie-title">{movie.vote_average}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+              {[...this.state.actor.movie_credits.cast]
+                .sort((a, b) => {
+                  switch (this.state.sortedBy) {
+                    case 'newest':
+                      return (
+                        new Date(b.release_date) - new Date(a.release_date)
+                      );
+                      break;
+                    case 'oldest':
+                      return (
+                        new Date(a.release_date) - new Date(b.release_date)
+                      );
+                      break;
+                    default:
+                      return b.vote_average - a.vote_average;
+                  }
+                })
+                .filter(img => img.poster_path)
+                .map(movie => {
+                  return (
+                    <Link to={`/movie/${movie.id}`} key={movie.id}>
+                      <div>
+                        <img
+                          alt={movie.original_title}
+                          src={`http://image.tmdb.org/t/p/w342/${
+                            movie.poster_path
+                          }`}
+                          className="movie-img"
+                        />
+                        <p className="movie-title">{movie.original_title}</p>
+                        <p className="movie-title">
+                          {movie.release_date.substring(0, 4)}
+                        </p>
+                        {movie.vote_average !== 0 && (
+                          <p className="movie-title">{movie.vote_average}</p>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+              ;
             </div>
           </React.Fragment>
         )}
