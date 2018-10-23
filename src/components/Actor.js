@@ -130,9 +130,7 @@ class Actor extends React.Component {
                           className="movie-img"
                         />
                         <p className="movie-title">{movie.original_title}</p>
-                        <p className="movie-title">
-                          {movie.release_date.substring(0, 4)}
-                        </p>
+                        <p className="movie-title">{movie.release_date}</p>
                         {movie.vote_average !== 0 && (
                           <p className="movie-title">{movie.vote_average}</p>
                         )}

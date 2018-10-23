@@ -60,7 +60,7 @@ class Movie extends React.Component {
               </div>
               <div className="movie-details">
                 <p className="movie-details-date">
-                  {this.state.singleMovie.release_date.substring(0, 4)}
+                  {this.state.singleMovie.release_date}
                 </p>
                 <h1>{this.state.singleMovie.original_title}</h1>
 
