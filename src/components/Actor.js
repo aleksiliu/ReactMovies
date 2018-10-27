@@ -2,8 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Error from './Error';
 
-import { browserHistory } from 'react-router';
-
 import { Link } from 'react-router-dom';
 
 import Select from 'react-select';
