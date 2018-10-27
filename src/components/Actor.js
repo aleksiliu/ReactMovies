@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Error from './Error';
 
+import { browserHistory } from 'react-router';
+
 import { Link } from 'react-router-dom';
 
 import Select from 'react-select';
@@ -43,7 +45,6 @@ class Actor extends React.Component {
 
   handleChange = sortedBy => {
     this.setState({ sortedBy });
-    console.log(`Option selected:`, sortedBy);
   };
 
   ellipsis = string => {
@@ -66,6 +67,12 @@ class Actor extends React.Component {
           <React.Fragment>
             <div className="actor">
               <div className="actor-bio flex">
+                <span
+                  className="back"
+                  onClick={() => this.props.history.goBack()}
+                >
+                  Back
+                </span>
                 <h1> {this.state.actor.name} </h1>
                 <h3> {this.state.actor.birthday} </h3>
                 {this.state.actor.biography === '' ? (
@@ -88,7 +95,6 @@ class Actor extends React.Component {
             <div className="sort">
               <p>Sort by</p>
               <Select
-                defaultValue={options[0]}
                 value={sortedBy}
                 onChange={this.handleChange}
                 options={options}
