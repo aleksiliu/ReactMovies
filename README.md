@@ -2,7 +2,7 @@
 
 Simple movie search app made with React js and CSS grid.
 
-See it live (https://aleksiliu.github.io/react-movies/#/)
+See it live https://aleksiliu.github.io/react-movies/#/
 
 ## Before Install
 
@@ -26,5 +26,4 @@ Run the program with:
 
 ```bash
 npm start
-open localhost:3000
 ```
