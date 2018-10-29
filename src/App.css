@@ -284,6 +284,38 @@ select {
   opacity: 1;
 }
 
+.movie-item {
+  margin-top: 1em;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 100px 2fr;
+  grid-template-areas: 'image content';
+  position: relative;
+  color: white;
+  padding: 20px;
+  text-align: left;
+}
+
+.movie-item:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.movie-search-img {
+  max-width: 100%;
+  height: auto;
+  grid-area: image;
+}
+
+.movie-search-details {
+  grid-area: content;
+  margin-left: 30px;
+}
+
+.movie-search-title {
+  text-align: left;
+  margin-top: 10px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -304,6 +336,23 @@ select {
     grid-row-gap: 30px;
     grid-template-columns: 1fr;
     padding: 0 20px 0 20px;
+  }
+
+  .movie-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'image' 'content';
+    position: relative;
+    grid-gap: 20px;
+    color: white;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .movie-search-details {
+    margin-left: 0;
   }
 
   .actor {

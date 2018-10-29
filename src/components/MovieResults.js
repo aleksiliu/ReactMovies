@@ -83,23 +83,26 @@ class MovieResults extends React.Component {
               <React.Fragment>
                 <h3>Results for "{this.props.match.params.term}"</h3>
 
-                <div className="movie-list">
+                <div className="movie-search-container">
                   {this.state.movies.results
                     .filter(img => img.poster_path)
                     .map(movie => {
                       return (
-                        <Link to={`/movie/${movie.id}`} key={movie.id}>
-                          <div>
-                            <img
-                              alt={movie.original_title}
-                              src={`http://image.tmdb.org/t/p/w342/${
-                                movie.poster_path
-                              }`}
-                              className="movie-img"
-                            />
-                            <p className="movie-title">
-                              {movie.original_title}
-                            </p>
+                        <Link
+                          to={`/movie/${movie.id}`}
+                          key={movie.id}
+                          className="movie-item"
+                        >
+                          <img
+                            alt={movie.original_title}
+                            src={`http://image.tmdb.org/t/p/w342/${
+                              movie.poster_path
+                            }`}
+                            className="movie-search-img"
+                          />
+                          <div className="movie-search-details">
+                            <h3>{movie.original_title}</h3>
+                            <p>{movie.overview}</p>
                           </div>
                         </Link>
                       );
