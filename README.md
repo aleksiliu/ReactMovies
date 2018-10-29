@@ -2,7 +2,7 @@
 
 Simple movie search app made with React js and CSS grid.
 
-See it live https://aleksiliu.github.io/react-movies/#/
+See it live https://aleksiliu.github.io/react-movies
 
 ## Before Install
 
@@ -11,7 +11,7 @@ Get API Key from [The Movie DB](https://developers.themoviedb.org/3/getting-star
 ## Install
 
 ```bash
-git clone https://github.com/aleksiliu/react-weather
+git clone https://github.com/aleksiliu/react-movies
 cd react-movies
 npm install
 ```
