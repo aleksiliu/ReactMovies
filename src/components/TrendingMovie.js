@@ -3,6 +3,10 @@ import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
+console.log(API_KEY);
+
 class TrendingMovie extends Component {
   state = {
     trending: undefined,
@@ -10,9 +14,7 @@ class TrendingMovie extends Component {
   };
   componentDidMount() {
     axios
-      .get(
-        `https://api.themoviedb.org/3/trending/movie/day?api_key=b0994f6029743a2f030a3fed34413897`
-      )
+      .get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`)
       .then(res => {
         const trending = res.data.results;
         this.setState({ trending, loading: false });

@@ -4,6 +4,8 @@ import Form from './Form';
 
 import { Link } from 'react-router-dom';
 
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
 class MovieResults extends React.Component {
   state = {
     movies: {},
@@ -14,7 +16,7 @@ class MovieResults extends React.Component {
   getMovie = () => {
     const term = this.props.match.params.term;
     return axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&query=${term}&page=${
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${term}&page=${
         this.state.page
       }&include_adult=false`
     );

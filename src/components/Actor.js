@@ -12,6 +12,8 @@ const options = [
   { value: 'newest', label: 'Newest' }
 ];
 
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
 class Actor extends React.Component {
   state = {
     actor: undefined,
@@ -29,7 +31,7 @@ class Actor extends React.Component {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/person/${id}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&&append_to_response=movie_credits`
+        `https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}&language=en-US&&append_to_response=movie_credits`
       )
       .then(res => {
         const actor = res.data;

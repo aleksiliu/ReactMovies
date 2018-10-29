@@ -4,6 +4,8 @@ import StarRatingComponent from 'react-star-rating-component';
 import Error from './Error';
 import { Link } from 'react-router-dom';
 
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
 class Movie extends React.Component {
   state = {
     singleMovie: undefined,
@@ -15,7 +17,7 @@ class Movie extends React.Component {
     const id = this.props.match.params.movieId;
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=b0994f6029743a2f030a3fed34413897&language=en-US&append_to_response=credits`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`
       )
       .then(res => {
         const singleMovie = res.data;
