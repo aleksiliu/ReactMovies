@@ -316,6 +316,10 @@ select {
   margin-top: 10px;
 }
 
+.results-title {
+  text-align: center;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

@@ -81,7 +81,9 @@ class MovieResults extends React.Component {
               <p>No movies found</p>
             ) : (
               <React.Fragment>
-                <h3>Results for "{this.props.match.params.term}"</h3>
+                <h3 className="results-title">
+                  Results for "{this.props.match.params.term}"
+                </h3>
 
                 <div className="movie-search-container">
                   {this.state.movies.results
